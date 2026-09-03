@@ -175,21 +175,26 @@ built on the Gen1Recomp engine.
 <div align="center">
 
 ```text
-GEN2RECOMP
-│
-├── CODE
-├── EXPERIMENT
-├── DEBUG
-├── RESEARCH
-├── ITERATE
-└── REPEAT
+┌──────────────────────────────────────────────┐
+│ GEN2RECOMP // DEVELOPMENT LOOP               │
+├──────────────────────────────────────────────┤
+│                                              │
+│  CODE        ──────┐                         │
+│  EXPERIMENT  ──────┤                         │
+│  DEBUG       ──────┤                         │
+│  RESEARCH    ──────┤──► ITERATE ──► REPEAT │
+│  BUILD       ──────┘                         │
+│                                              │
+│  STATUS :: ACTIVE                            │
+│                                              │
+└──────────────────────────────────────────────┘
 ```
 
 <br>
 
-<sub>
-Follow the repository to see the project evolve through commits, issues, releases, and new development.
-</sub>
+<a href="https://github.com/oddyseex/Gen2Recomped/commits/main">
+<img src="https://img.shields.io/badge/VIEW%20DEVELOPMENT%20HISTORY-11151A?style=for-the-badge&logo=github&logoColor=00D9FF&labelColor=11151A&color=1B2228" alt="View Gen2Recomp development history" />
+</a>
 
 </div>
 
@@ -217,7 +222,31 @@ Follow the repository to see the project evolve through commits, issues, release
 
 <div align="center">
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=oddyseex&bg_color=08090B&color=B8C4CC&line=00F5FF&point=FFFFFF&area=true&hide_border=true&custom_title=CONTRIBUTION%20MATRIX" width="95%" alt="GitHub contribution activity graph" />
+```text
+┌──────────────────────────────────────────────┐
+│ ODDYSEE// CONTRIBUTION MATRIX               │
+├──────────────────────────────────────────────┤
+│                                              │
+│  CONTRIBUTIONS                               │
+│  ├── CODE                                    │
+│  ├── COMMITS                                 │
+│  ├── EXPERIMENTS                             │
+│  ├── PROJECTS                                │
+│  └── ITERATION                               │
+│                                              │
+│  ──────────────────────────────────────────  │
+│                                              │
+│  ACTIVITY IS THE OUTPUT.                     │
+│  BUILDING IS THE PROCESS.                    │
+│                                              │
+└──────────────────────────────────────────────┘
+```
+
+<br>
+
+<a href="https://github.com/oddyseex">
+<img src="https://img.shields.io/badge/VIEW%20GITHUB%20ACTIVITY-11151A?style=for-the-badge&logo=github&logoColor=00D9FF&labelColor=11151A&color=1B2228" alt="View GitHub activity" />
+</a>
 
 </div>
 
