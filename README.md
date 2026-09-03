@@ -2,95 +2,109 @@
 
 # ODDYSEE//
 
-### `GAME DEV • SOFTWARE ENGINEERING • SYSTEMS`
+**Game Developer • Software Engineer • Reverse Engineer**
 
-**I build, break, and reverse-engineer things to understand how they work.**
+I build things to understand how they work.
 
-[GitHub](https://github.com/oddyseex) · [All My Links](https://allmylinks.com/oddysee)
+Game systems. Tools. Mods. AI/LLM experiments.
+Sometimes hardware. Sometimes software. Usually both.
+
+[ Projects ] • [ GitHub ] • [ All My Links ]
 
 </div>
 
 ---
 
-## `// ABOUT`
-
-I'm a developer interested in **game development, software engineering, modding, reverse engineering, and experimental projects**.
-
-I like working close to the system — understanding existing code, figuring out why things work, breaking them, and building from what I learn.
-
----
-
-## `// CURRENT PROJECT`
+## `// CURRENTLY BUILDING`
 
 ### 🎮 Gen2Recomped
 
-A fork of [UNDERdecoded/Gen2Recomped](https://github.com/UNDERdecoded/Gen2Recomped), a native **LÖVE2D** recreation of Pokémon Generation II built on the Gen1Recomp engine.
+A **Generation 2 Pokémon decompilation/recompilation project** based on the Gen1Recomp ecosystem.
 
-The project involves:
+I'm using it as a laboratory for:
 
-* Generation II game systems and mechanics
-* Lua-based engine and scripting
-* ROM data extraction and decoding
-* Game systems and runtime architecture
-* Modding and tooling
-* Cross-platform builds and ports
-* Testing, debugging, and reverse-engineering work
+* game systems & mechanics
+* C development
+* reverse engineering
+* tooling & automation
+* debugging
+* understanding legacy game architecture
 
-**Repository:** [github.com/oddyseex/Gen2Recomped](https://github.com/oddyseex/Gen2Recomped)
-
----
-
-## `// AREAS OF INTEREST`
-
-```text
-GAME DEVELOPMENT
-├── Game systems
-├── Mechanics
-├── Tools
-└── Modding
-
-SOFTWARE
-├── Systems
-├── Automation
-├── Tooling
-└── Experimental projects
-
-REVERSE ENGINEERING
-├── Code & behavior analysis
-├── Legacy systems
-├── Data formats
-└── Reimplementation
-
-AI / LLM
-├── Tools
-├── Automation
-└── Experimentation
-
-HARDWARE
-└── Experimental builds
-```
+→ **[View Gen2Recomped](https://github.com/oddyseex/Gen2Recomped)**
 
 ---
 
-## `// CURRENT MODE`
+## `// WHAT I WORK ON`
+
+| Area                        | Interests                                           |
+| --------------------------- | --------------------------------------------------- |
+| 🎮 **Game Development**     | Systems, mechanics, tools, game architecture        |
+| ⚙️ **Modding**              | Scripting, tooling, experimentation                 |
+| 🔬 **Reverse Engineering**  | Understanding systems from the inside out           |
+| 🧠 **AI / LLMs**            | Agents, automation, developer tools                 |
+| 🔩 **Hardware**             | Experimental builds, debugging, reverse engineering |
+| 💻 **Software Engineering** | Building, breaking, refactoring, learning           |
+
+---
+
+## `// TOOLBOX`
+
+**Languages**
+
+`C` `Python` `Lua` `JavaScript` `Swift` `HTML` `CSS`
+
+**Tools**
+
+`Git` `GitHub` `VS Code` `Android Studio` `Xcode`
+
+> My stack changes with the problem. I care more about understanding the system than collecting technologies.
+
+---
+
+## `// HOW I WORK`
 
 ```text
-┌──────────────────────────────────────┐
-│             ODDYSEE//                │
-├──────────────────────────────────────┤
-│ STATUS      :: BUILDING              │
-│ MODE        :: LEARNING              │
-│ APPROACH    :: EXPERIMENTAL          │
-│ DIRECTION   :: FORWARD               │
-└──────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│              ODDYSEE// LOOP              │
+├──────────────────────────────────────────┤
+│                                          │
+│   FIND → BUILD → BREAK → DEBUG → LEARN  │
+│                  │                       │
+│                  └────── ITERATE ───────┘
+│                                          │
+└──────────────────────────────────────────┘
 ```
+
+I like projects where the interesting part is figuring out **why something works**.
+
+Read the code.
+Break the code.
+Understand the system.
+Build it better.
+
+---
+
+## `// PROJECTS`
+
+**01 — [Gen2Recomped](https://github.com/oddyseex/Gen2Recomped)**
+Generation 2 Pokémon recompilation/decompilation work.
+
+More projects will appear here as they become worth showing.
+
+---
+
+## `// PHILOSOPHY`
 
 > **BUILD // BREAK // LEARN // CREATE**
+
+I'm less interested in pretending I know everything and more interested in finding out.
 
 ---
 
 <div align="center">
 
-`SYSTEM ONLINE // ALWAYS BUILDING`
+`SYSTEM STATUS :: BUILDING`
+
+**Always learning. Always building.**
 
 </div>
