@@ -38,12 +38,3 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 
 <div align="center">
 
-
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="380" alt="Gen2Recomp logo" />
-
-<br>
-
-
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="190" alt="UNDERdecodedHD logo" />
-
-<br>
