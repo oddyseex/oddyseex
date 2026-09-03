@@ -23,7 +23,7 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 ---
 
 ## `// AREAS OF FOCUS`
- Reverse engineering • Experimental builds
+
 
 <img src="https://skillicons.dev/icons?i=lua,py,swift,html,css,js" alt="Lua, Python, Swift, HTML, CSS, JavaScript" />
 
@@ -38,17 +38,15 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 
 <img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" alt="Xcode" />
 <img src="https://img.shields.io/badge/ACode-111111?style=for-the-badge&logo=android&logoColor=3DDC84" alt="ACode" />
-@@ -109,19 +119,26 @@ Reverse engineering • Experimental builds
+
 
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="420" alt="Gen2Recomp logo" />
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="380" alt="Gen2Recomp logo" />
 
 <br>
 
 <img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="220" alt="UNDERdecodedHD logo" />
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="190" alt="UNDERdecodedHD logo" />
 
 <br>
 
@@ -83,21 +81,3 @@ and
 
 
 ---
-
-@@ -158,7 +177,11 @@ GEN2RECOMP
-└── 
-```
-
-
-
-
-</div>
-
-@@ -196,7 +219,11 @@ GEN2RECOMP
-
-<div align="center">
-
-**BUILD // BREAK // LEARN // CREATE**
-
-
-<br>
