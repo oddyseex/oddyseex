@@ -7,10 +7,6 @@
 
 <br>
 
-`"//" SYSTEM ONLINE "//" BUILDING "//" LEARNING "//"`
-
-</div>
-@@ -12,10 +16,14 @@
 
 ## `// ABOUT`
 
@@ -25,7 +21,6 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 ---
 
 ## `// AREAS OF FOCUS`
-@@ -65,11 +73,13 @@ Reverse engineering • Experimental builds
 
 <img src="https://skillicons.dev/icons?i=lua,py,swift,html,css,js" alt="Lua, Python, Swift, HTML, CSS, JavaScript" />
 
@@ -38,18 +33,17 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 <br>
 <br><br>
 
-<img src="https://img.shields.io/badge/Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" alt="Xcode" />
+
 <img src="https://img.shields.io/badge/ACode-111111?style=for-the-badge&logo=android&logoColor=3DDC84" alt="ACode" />
-@@ -109,19 +119,26 @@ Reverse engineering • Experimental builds
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="420" alt="Gen2Recomp logo" />
+
 <img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="380" alt="Gen2Recomp logo" />
 
 <br>
 
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="220" alt="UNDERdecodedHD logo" />
+
 <img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="190" alt="UNDERdecodedHD logo" />
 
 <br>
@@ -58,8 +52,6 @@ Building stuff, breaking stuff, figuring out how stuff works, and learning new s
 
 <br>
 
-A fork of [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) by [bryanthaboi](https://github.com/bryanthaboi) and [BOIS CLUB GAMES](https://boisclub.games/).
-<sub>
 A fork of
 <a href="https://github.com/bryanthaboi/gen1recomp">Gen1Recomp</a>
 by
@@ -70,11 +62,10 @@ and
 
 <br><br>
 
-@@ -132,14 +149,16 @@ A fork of [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) by [bryanthabo
+A fork of [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) by [bryanthabo
 <br><br>
 
 <a href="https://github.com/oddyseex/Gen2Recomped">
-<img src="https://img.shields.io/badge/OPEN%20PROJECT%20%E2%86%92-08090B?style=for-the-badge&labelColor=11151A&color=2A3036" alt="Open Gen2Recomped project" />
 <img src="https://img.shields.io/badge/OPEN_PROJECT-↗-1B2228?style=for-the-badge&labelColor=11151A&logo=github&logoColor=00D9FF&color=1B2228" alt="Open Gen2Recomped project" />
 </a>
 
@@ -90,28 +81,7 @@ and
 
 ---
 
-@@ -158,7 +177,11 @@ GEN2RECOMP
-└── REPEAT
-```
 
-> «Follow the repository to see the project evolve through commits, issues, releases, and new development.»
-<br>
 
-<sub>
-Follow the repository to see the project evolve through commits, issues, releases, and new development.
-</sub>
-
-</div>
-
-@@ -196,7 +219,11 @@ GEN2RECOMP
-
-<div align="center">
-
-**BUILD // BREAK // LEARN // CREATE**
-### `BUILD // BREAK // LEARN // CREATE`
-
-<br>
-
-<sub>Understand the system. Then build something better.</sub>
 
 </div>
