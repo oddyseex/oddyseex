@@ -8,7 +8,6 @@ Game dev. Software engineer.
 
 Building stuff, breaking stuff, figuring out how stuff works, and learning new stuff.
 
-I'm interested in the intersection of software, games, AI, and hardware — turning ideas into things that actually work.
 
 ---
 
@@ -19,13 +18,13 @@ I'm interested in the intersection of software, games, AI, and hardware — turn
 <td width="50%" valign="top">
 
 **🎮 GAME DEVELOPMENT**
-Game systems • Mechanics • Tools
+Systems • Mechanics • Tools
 
 </td>
 <td width="50%" valign="top">
 
 **⚙️ MODDING / SCRIPTING**
-Lua • Scripting • Reverse engineering
+Scripting • Reverse engineering
 
 </td>
 </tr>
@@ -33,13 +32,13 @@ Lua • Scripting • Reverse engineering
 <td width="50%" valign="top">
 
 **🧠 AI / LLM**
-AI tools • LLMs • Automation
+Tools • LLMs • Automation
 
 </td>
 <td width="50%" valign="top">
 
 **🔩 HARDWARE ENGINEERING**
-Embedded systems • Experimental builds
+reverse engineering • Experimental builds
 
 </td>
 </tr>
@@ -79,7 +78,7 @@ Languages & Technologies
 │ ├── MODDING / SCRIPTING                      │
 │ └── HARDWARE                                 │
 │                                              │
-│ ALWAYS LEARNING. ALWAYS BUILDING.            │
+│                                              │
 └──────────────────────────────────────────────┘
 
 ---
@@ -92,7 +91,6 @@ Languages & Technologies
 
 </div>Gen2Recomp is the current featured project.
 
-This is where the theory turns into actual development — code, experiments, problem solving, debugging, and iteration.
 
 "// DEVELOPMENT ACTIVITY"
 
@@ -121,7 +119,7 @@ GEN2RECOMP
 
 "// PHILOSOPHY"
 
-<div align="center">Do it for the love of the game.
+<div align="center"
 
 "BUILD // BREAK // LEARN // CREATE"
 
