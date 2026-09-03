@@ -14,11 +14,36 @@ I'm interested in the intersection of software, games, AI, and hardware — turn
 
 "// AREAS OF FOCUS"
 
-🎮 GAME DEVELOPMENT| ⚙️ MODDING / SCRIPTING
-Game systems • Mechanics • Tools| Lua • Scripting • Reverse engineering
+<table>
+<tr>
+<td width="50%" valign="top">
 
-🧠 AI / LLM| 🔩 HARDWARE ENGINEERING
-AI tools • LLMs • Automation| Embedded systems • Experimental builds
+**🎮 GAME DEVELOPMENT**
+Game systems • Mechanics • Tools
+
+</td>
+<td width="50%" valign="top">
+
+**⚙️ MODDING / SCRIPTING**
+Lua • Scripting • Reverse engineering
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**🧠 AI / LLM**
+AI tools • LLMs • Automation
+
+</td>
+<td width="50%" valign="top">
+
+**🔩 HARDWARE ENGINEERING**
+Embedded systems • Experimental builds
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -27,11 +52,16 @@ AI tools • LLMs • Automation| Embedded systems • Experimental builds
 Languages & Technologies
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=lua,html,css,js" />
+<img src="https://skillicons.dev/icons?i=lua,py,swift,html,css,js" />
 </p>Tools
 
 <p align="center">
-<img src="https://skillicons.dev/icons?i=git,github,vscode,blender" />
+<img src="https://skillicons.dev/icons?i=git,github,vscode,androidstudio" />
+</p>
+
+<p align="center">
+<img src="https://img.shields.io/badge/Xcode-08090B?style=for-the-badge&logo=xcode&logoColor=00E5FF" />
+<img src="https://img.shields.io/badge/ACode-08090B?style=for-the-badge&logo=acode&logoColor=00E5FF" />
 </p>---
 
 "// DEVELOPMENT STATUS"
@@ -58,7 +88,7 @@ Languages & Technologies
 
 "01" — GEN2RECOMP
 
-<div align="center"><a href="../gen2recomp"><img src="https://github-readme-stats.vercel.app/api/pin/?username=oddyseex&repo=gen2recomp&hide_border=true&bg_color=08090B&title_color=FFFFFF&text_color=B8C4CC&icon_color=00E5FF" width="70%" /></a><br>[ OPEN PROJECT → ]
+<div align="center"><a href="https://github.com/oddyseex/Gen2Recomped"><img src="https://github-readme-stats.vercel.app/api/pin/?username=oddyseex&repo=Gen2Recomped&hide_border=true&bg_color=08090B&title_color=FFFFFF&text_color=B8C4CC&icon_color=00E5FF" width="70%" /></a><br>[ OPEN PROJECT → ]
 
 </div>Gen2Recomp is the current featured project.
 
