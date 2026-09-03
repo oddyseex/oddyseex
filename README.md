@@ -109,6 +109,10 @@ Reverse engineering • Experimental builds
 
 <div align="center">
 
+<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/README/gen2recomp.png" width="90%" alt="Gen2Recomp" />
+
+<br><br>
+
 <a href="https://github.com/oddyseex/Gen2Recomped">
 <img src="https://github-readme-stats.vercel.app/api/pin/?username=oddyseex&repo=Gen2Recomped&theme=dark&bg_color=08090B&title_color=FFFFFF&text_color=B8C4CC&icon_color=00F5FF&border_color=08090B" alt="Gen2Recomped repository" />
 </a>
@@ -121,7 +125,9 @@ Reverse engineering • Experimental builds
 
 </div>
 
-> Gen2Recomp is the current featured project.
+> **Gen2Recomp** — a native LÖVE2D recreation of Pokémon Gold, Silver and Crystal, built on the Gen1Recomp engine.
+
+> Engine, script VM, and map behavior are hand-written in Lua, with Generation II systems including the Johto and Kanto worlds, day/night, breeding, Pokégear, shinies, held items, and more.
 
 ---
 
