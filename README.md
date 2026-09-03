@@ -103,7 +103,6 @@ Reverse engineering • Experimental builds
 
 ---
 
-## `// PROJECT LAB`
 
 ## `// PROJECT LAB`
 
@@ -111,17 +110,21 @@ Reverse engineering • Experimental builds
 
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="85%" alt="Gen2Recomp logo" />
+<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/gen2logo.png" width="700" alt="Gen2Recomp logo" />
 
 <br><br>
 
-<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="140" alt="UNDERdecoded logo" />
+<img src="https://raw.githubusercontent.com/UNDERdecoded/Gen2Recomped/main/assets/logo/UD.png" width="420" alt="UNDERdecodedHD logo" />
 
 <br>
 
 **by UNDERdecodedHD**
 
-<br>
+<br><br>
+
+A fork of [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) by [bryanthaboi](https://github.com/bryanthaboi) and [BOIS CLUB GAMES](https://boisclub.games/).
+
+<br><br>
 
 <a href="https://github.com/oddyseex/Gen2Recomped">
 <img src="https://github-readme-stats.vercel.app/api/pin/?username=oddyseex&repo=Gen2Recomped&theme=dark&bg_color=08090B&title_color=FFFFFF&text_color=B8C4CC&icon_color=00F5FF&border_color=08090B" alt="Gen2Recomped repository" />
@@ -130,18 +133,8 @@ Reverse engineering • Experimental builds
 <br><br>
 
 <a href="https://github.com/oddyseex/Gen2Recomped">
-<img src="https://img.shields.io/badge/OPEN%20PROJECT%20%E2%86%92-00F5FF?style=for-the-badge&logoColor=08090B" alt="Open Gen2Recomped project" />
+<img src="https://img.shields.io/badge/OPEN%20PROJECT%20%E2%86%92-00F5FF?style=for-the-badge&labelColor=08090B&color=00F5FF" alt="Open Gen2Recomped project" />
 </a>
-
-</div>
-
-> A fork of [Gen1Recomp](https://github.com/bryanthaboi/gen1recomp) by [bryanthaboi](https://github.com/bryanthaboi) and [BOIS CLUB GAMES](https://boisclub.games/).
-
-> A native LÖVE2D recreation of Pokémon Gold, Silver and Crystal, built on Gen1Recomp's Red/Blue/Yellow engine. The engine, script VM, and map behavior are hand-written in Lua.
-
-<div align="center">
-
-`BUILD // BREAK // LEARN // CREATE`
 
 </div>
 
