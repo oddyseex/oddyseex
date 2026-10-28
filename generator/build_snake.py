@@ -18,7 +18,7 @@ from pathlib import Path
 INK = "#0f0e11"
 PAPER = "#ffffff"
 LEVELS = ["#1f1d24", "#4a3399", "#6a45d6", "#8956fd", "#b9a0ff"]   # empty, then four strengths of purple
-LEVEL_NAMES = {"NONE": 0, "FIRST_QUARTER": 1, "SECOND_QUARTER": 2, "THIRD_QUARTER": 3, "FOURTH_QUARTER": 4}
+LEVEL_NAMES = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUARTILE": 3, "FOURTH_QUARTILE": 4}
 
 CELL, PITCH, ROWS = 12, 16, 7
 PAD = 28
@@ -41,7 +41,7 @@ def fetch_weeks(login, token):
     if "errors" in payload:
         raise RuntimeError(payload["errors"])
     weeks = payload["data"]["user"]["contributionsCollection"]["contributionCalendar"]["weeks"]
-    return [{d["weekday"]: LEVEL_NAMES[d["contributionLevel"]] for d in w["contributionDays"]} for w in weeks]
+    return [{d["weekday"]: LEVEL_NAMES.get(d["contributionLevel"], 0) for d in w["contributionDays"]} for w in weeks]
 
 
 def sample_weeks():
