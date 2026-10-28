@@ -354,7 +354,9 @@ def loadout(mobile=False):
 
 def main():
     ASSETS.mkdir(exist_ok=True)
-    for name, fn in (("hero", hero), ("loadout", loadout)):
+    import scenes
+    hero_scene = lambda m: hero(m, scenes.hybrid, "Beside the words, a pixel controller builds, glitches and shatters while a build log says $#!%...., then it rebuilds and the log says COMPLETE.")
+    for name, fn in (("hero", hero_scene), ("loadout", loadout)):
         (ASSETS / f"{name}.svg").write_text(fn(False))
         (ASSETS / f"{name}-mobile.svg").write_text(fn(True))
     print("profile graphics written to", ASSETS)
