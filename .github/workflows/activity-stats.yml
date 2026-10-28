@@ -1,0 +1,46 @@
+name: Activity stats
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    paths:
+      - "generator/**"
+      - ".github/workflows/activity-stats.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install font tools
+        run: pip install fonttools
+
+      # Add a repository secret named PROFILE_STATS_TOKEN (a personal access token with read:user)
+      # to include private contributions. Without it, only public activity is counted.
+      - name: Draw the activity graphics
+        run: python3 generator/build_activity.py --mode api --login ${{ github.repository_owner }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROFILE_STATS_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/activity.svg assets/activity-mobile.svg
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update activity graphics"
+            git push
+          fi
