@@ -222,33 +222,25 @@ CSS_SCENE = "@media (prefers-reduced-motion:reduce){.puck{display:none}}"
 
 
 # ---------------------------------------------------------------- hero
-HERO_LINES = ["GAME DEV.", "SOFTWARE ENGINEER."]
-HERO_SENTENCE = "Building stuff, breaking stuff, figuring out how stuff works, and learning new stuff."
+HERO_LINES = ["BUILD $#!%,", "BREAK $#!%,", "BUILD $#!% AGAIN."]   # grawlix stands in for the swear word
 
 
-def hero(mobile=False):
-    """A compact banner: the name and a line about me on the left, the Plinko board on the right."""
+def hero(mobile=False, scene_fn=None, desc=None):
+    """A compact banner: the line on the left, the Plinko board on the right."""
     foot_h = 0
-    W, m = (480, 12) if mobile else (1000, 12)
+    W, m = (480, 6) if mobile else (1000, 6)
     if mobile:
         card_w = W - 2 * m
-        word_size = 100 * 330 / DISPLAY.width("ODDYSEE", 100, -2)
-        head_size = min(30, 100 * (card_w - 64) / DISPLAY.width(" ".join(HERO_LINES), 100, -1))
-        sent_size, body_w, gap = 17, 380, 16
-        lines = TEXT.balanced(HERO_SENTENCE, sent_size, body_w)
-        sent_lh = sent_size * 1.5
-        block = DISPLAY.cap(word_size) + gap + DISPLAY.cap(head_size) + gap + len(lines) * sent_lh
-        H_card = round(32 + block + 32 + foot_h)
+        head_size = min(64, 100 * (card_w - 64) / max(DISPLAY.width(t, 100, -1) for t in HERO_LINES))
+        lead = 1.1 * head_size
+        block = DISPLAY.cap(head_size) + (len(HERO_LINES) - 1) * lead
+        H_card = round(40 + block + 40 + foot_h)
         scene_h = 290
     else:
         H_card = 280
         k = H_card / 536
         panel_w = round(482 * k)
         card_w = W - 3 * m - panel_w
-        word_size = 100 * 330 / DISPLAY.width("ODDYSEE", 100, -2)
-        head_size, sent_size, body_w = 34, 18, 270
-        lines = TEXT.balanced(HERO_SENTENCE, sent_size, body_w)
-        sent_lh = sent_size * 1.5
 
     avail = H_card - foot_h
     card = [surface_rect(m, m, card_w, H_card, seed=7 if not mobile else 8, scale=0.55 if not mobile else 0.5)]
@@ -258,65 +250,54 @@ def hero(mobile=False):
 
     if mobile:
         cx = m + card_w / 2
-        y = m + (avail - block) / 2 + DISPLAY.cap(word_size)
-        card.append(text(DISPLAY, "ODDYSEE", word_size, cx, y, PAPER, "middle", -2))
-        y += gap + DISPLAY.cap(head_size)
-        card.append(text(DISPLAY, " ".join(HERO_LINES), head_size, cx, y, PAPER, "middle", -1))
-        y += gap + TEXT.cap(sent_size)
-        for ln in lines:
-            card.append(text(TEXT, ln, sent_size, cx, y, SOFT, "middle"))
-            y += sent_lh
+        y = m + (avail - block) / 2 + DISPLAY.cap(head_size)
+        for t in HERO_LINES:
+            card.append(text(DISPLAY, t, head_size, cx, y, PAPER, "middle", -1))
+            y += lead
         scene_y = m + H_card + m
         H = scene_y + scene_h + m
-        scene, _ = plinko(m, scene_y, card_w, scene_h, True, k=scene_h / 536)
+        scene = scene_fn(m, scene_y, card_w, scene_h, True) if scene_fn else plinko(m, scene_y, card_w, scene_h, True, k=scene_h / 536)[0]
     else:
-        left_x = m + 36
-        cap_w = DISPLAY.cap(word_size)
-        card.append(text(DISPLAY, "ODDYSEE", word_size, left_x + 165, m + (avail + cap_w) / 2, PAPER, "middle", -2))
-        # a short thick bar between the two columns
-        bar_x = left_x + 330 + 17
-        card.append(rect(bar_x, m + avail / 2 - 50, 6, 100, ACCENT))
-        rx = bar_x + 6 + 22
-        cap_h = DISPLAY.cap(head_size)
-        block = cap_h + head_size * 1.02 + 16 + TEXT.cap(sent_size) + (len(lines) - 1) * sent_lh
-        y = m + (avail - block) / 2 + cap_h
-        card.append(text(DISPLAY, HERO_LINES[0], head_size, rx, y, PAPER, "start", -1))
-        y += head_size * 1.02
-        card.append(text(DISPLAY, HERO_LINES[1], head_size, rx, y, PAPER, "start", -1))
-        y += 16 + TEXT.cap(sent_size)
-        for ln in lines:
-            card.append(text(TEXT, ln, sent_size, rx, y, SOFT, "start"))
-            y += sent_lh
+        cx = m + card_w / 2
+        # the three lines are the whole banner: as large as the card's height and width allow, centred
+        head_size = min(100 * (card_w - 120) / max(DISPLAY.width(t, 100, -1) for t in HERO_LINES),
+                        (avail - 70) / (DISPLAY.cap(1) + (len(HERO_LINES) - 1) * 1.1))
+        lead = head_size * 1.1
+        block = DISPLAY.cap(head_size) + (len(HERO_LINES) - 1) * lead
+        y = m + (avail - block) / 2 + DISPLAY.cap(head_size)
+        for t in HERO_LINES:
+            card.append(text(DISPLAY, t, head_size, cx, y, PAPER, "middle", -1))
+            y += lead
         H = m + H_card + m
-        scene, _ = plinko(m + card_w + m, m, W - 3 * m - card_w, H_card, False, k=k)
+        scene = (scene_fn(m + card_w + m, m, W - 3 * m - card_w, H_card, False) if scene_fn
+                 else plinko(m + card_w + m, m, W - 3 * m - card_w, H_card, False, k=k)[0])
 
     body = rect(0, 0, W, H, ACCENT) + "".join(card) + scene
-    return svg(W, H, body, "ODDYSEE",
-               "Game dev. Software engineer. Building stuff, breaking stuff, figuring out how stuff works, "
-               "and learning new stuff. Beside it, an animated triangular Plinko board where pucks drop into red cups that light up when a puck drops in.", CSS_SCENE)
+    return svg(W, H, body, "Build $#!%, break $#!%, build $#!% again",
+               desc or "Beside the words, an animated triangular Plinko board where pucks drop into red cups that light up when a puck drops in.", CSS_SCENE)
 
 
 # ---------------------------------------------------------------- loadout
-TOOLS = [("3D creation", "blender", None), ("Game engine", "unrealengine", PAPER), ("Code editor", "vscode", "#007ACC")]
+TOOLS = [("3D creation", "blender", None), ("Game engine", "unrealengine", None), ("Code editor", "vscode", None)]
 # each language in its own brand colour (hex values from the Simple Icons data)
-LANGS = [("lua", ".lua", "#2C2D72"), ("python", ".py", "#3776AB"), ("javascript", ".js", "#F7DF1E"),
-         ("swift", ".swift", "#F05138"), ("kotlin", ".kt", "#7F52FF")]
+LANGS = [("lua", ".lua", None), ("python", ".py", None), ("javascript", ".js", "#F7DF1E"),
+         ("swift", ".swift", None), ("kotlin", ".kt", None)]
 ALT = {"blender": "Blender", "unrealengine": "Unreal Engine", "vscode": "VS Code", "lua": "Lua", "python": "Python",
        "javascript": "JavaScript", "swift": "Swift", "kotlin": "Kotlin"}
 
 
 def loadout(mobile=False):
     if mobile:
-        W, m = 480, 12
+        W, m = 480, 6
         sheet_x, sheet_w = m, W - 2 * m
         pad = 30
         title_size, group_size, desc_size, note_size = 52, 30, 20, 19
         tile, ltile = 48, 40
     else:
-        W, m = 1000, 40
-        sheet_w = 720
-        sheet_x = (W - sheet_w) / 2
-        pad = 64
+        W, m = 1000, 6
+        sheet_w = W - 2 * m
+        sheet_x = m
+        pad = 150
         title_size, group_size, desc_size, note_size = 58, 34, 22, 21
         tile, ltile = 56, 44
     inner_l, inner_r = sheet_x + pad, sheet_x + sheet_w - pad
@@ -366,7 +347,7 @@ def loadout(mobile=False):
         body += row(ry, tile, key, mono, desc)
     body.append(text(DISPLAY, "Languages", group_size, cx, g2_y, PAPER, "middle"))
     for ry, ext, key, colour in lang_rows:
-        body += row(ry, ltile, key, colour, ext, backing=key == "lua")
+        body += row(ry, ltile, key, colour, ext, backing=False)
     alt = "Tools: " + ", ".join(ALT[k] for _, k, _ in TOOLS) + ". Languages: " + ", ".join(ALT[k] for k, _, _ in LANGS) + "."
     return svg(W, H, "".join(body), "Loadout", alt)
 

@@ -22,9 +22,13 @@ LEVEL_NAMES = {"NONE": 0, "FIRST_QUARTILE": 1, "SECOND_QUARTILE": 2, "THIRD_QUAR
 
 CELL, PITCH, ROWS = 12, 16, 7
 PAD = 28
-SPEED = 140.0                                # pixels per second along the path
-SIZES = [12, 12, 11, 10, 9, 8, 7]            # head first; the squares shrink toward the tail
-LEAD = 130                                   # path before and after the graph, off screen, longer than the snake
+SPEED = 300.0                                # pixels per second along the path
+HEAD = 15
+BODY = [13, 13, 12.5, 12.5, 12, 11.5, 11, 10, 9, 8, 6.5, 5]   # behind the head, tapering to the tail
+STEP = 11.0                                  # distance between the middles of neighbouring squares
+SCALE_A, SCALE_B = "#f3edff", "#cbb8ff"      # two flat tones that alternate, like scales
+TONGUE = "#ff6b5c"
+LEAD = 200                                   # path before and after the graph, off screen, longer than the snake
 
 QUERY = ("query($l:String!){user(login:$l){contributionsCollection{contributionCalendar{weeks{"
          "contributionDays{weekday contributionLevel}}}}}}")
@@ -61,42 +65,123 @@ def n(v):
 
 
 def build(weeks):
+    """A snake that hunts: it runs a Manhattan route through the contribution cells instead of sweeping every column,
+    eats each one as the head crosses it, and has a head with eyes and a tongue and a scaled, tapering body."""
     cols = len(weeks)
     x_of = lambda c: c * PITCH + CELL / 2
-    top, bottom = CELL / 2, (ROWS - 1) * PITCH + CELL / 2
+    y_of = lambda r: r * PITCH + CELL / 2
 
-    # one straight zigzag: down the first column, step right, up the next, and so on
-    d = [f"M{n(x_of(0))} {n(top - LEAD)}V{n(bottom)}"]
-    length = LEAD + (bottom - top)
-    for c in range(1, cols):
-        d.append(f"H{n(x_of(c))}V{n(top if c % 2 == 1 else bottom)}")
-        length += PITCH + (bottom - top)
-    d.append(f"V{n((bottom if (cols - 1) % 2 == 0 else top) + (LEAD if (cols - 1) % 2 == 0 else -LEAD))}")
-    length += LEAD
+    # visit order: left to right, and inside a column start from the end nearest the snake
+    targets, cur = [], None
+    for c, week in enumerate(weeks):
+        rows = sorted(r for r, v in week.items() if v > 0)
+        if cur is not None and rows and abs(rows[-1] - cur) < abs(rows[0] - cur):
+            rows.reverse()
+        for r in rows:
+            targets.append((c, r))
+            cur = r
+    if not targets:
+        targets = [(0, ROWS // 2), (cols - 1, ROWS // 2)]
+    # a row for every column: straight to the cells, a slow weave across the empty stretches between them
+    import math
+    tcols = sorted({c for c, _ in targets})
+    first_row = {}
+    for c, r in targets:
+        first_row.setdefault(c, r)
+    keys = sorted(first_row)
+
+    def row_at(c):
+        if c in first_row:
+            return first_row[c]
+        lo = max((k for k in keys if k < c), default=None)
+        hi = min((k for k in keys if k > c), default=None)
+        if lo is None:
+            base = first_row[hi]
+        elif hi is None:
+            base = first_row[lo]
+        else:
+            base = first_row[lo] + (first_row[hi] - first_row[lo]) * (c - lo) / (hi - lo)
+        near = min(abs(c - k) for k in keys)
+        wave = 2.2 * math.sin(c * 2 * math.pi / 10) * min(1.0, near / 3)
+        return max(0, min(ROWS - 1, round(base + wave)))
+
+    cx, cy = x_of(0) - LEAD, y_of(row_at(0))
+    d = [f"M{n(cx)} {n(cy)}"]
+    segs, length = [], 0.0                      # (x1, y1, x2, y2, distance at start)
+
+    def go(tx, ty):
+        nonlocal cx, cy, length
+        if tx != cx:
+            d.append(f"H{n(tx)}")
+            segs.append((cx, cy, tx, cy, length)); length += abs(tx - cx); cx = tx
+        if ty != cy:
+            d.append(f"V{n(ty)}")
+            segs.append((cx, cy, cx, ty, length)); length += abs(ty - cy); cy = ty
+
+    stacks = {}
+    for c, r in targets:
+        stacks.setdefault(c, []).append(r)
+    for c in range(cols):
+        go(x_of(c), y_of(row_at(c)))
+        for r in stacks.get(c, [])[1:]:
+            go(x_of(c), y_of(r))
+    end = x_of(cols - 1) + LEAD
+    d.append(f"H{n(end)}")
+    segs.append((cx, cy, end, cy, length)); length += end - cx
     d = "".join(d)
     cycle = length / SPEED
-    lag = PITCH / SPEED                              # each square follows the one in front one cell later
+
+    def eaten_at(c, r):
+        """Seconds until the head first crosses the middle of cell (c, r)."""
+        px, py = x_of(c), y_of(r)
+        for x1, y1, x2, y2, d0 in segs:
+            if y1 == y2 == py and min(x1, x2) <= px <= max(x1, x2):
+                return (d0 + abs(px - x1)) / SPEED
+            if x1 == x2 == px and min(y1, y2) <= py <= max(y1, y2):
+                return (d0 + abs(py - y1)) / SPEED
+        return None
 
     W = (cols - 1) * PITCH + CELL
     H = (ROWS - 1) * PITCH + CELL
     vb = (-PAD, -PAD, W + 2 * PAD, H + 2 * PAD)
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb[0]} {vb[1]} {vb[2]} {vb[3]}" '
            f'width="{vb[2]}" height="{vb[3]}" role="img" '
-           f'aria-label="A snake of squares winding through my GitHub contribution graph">',
+           f'aria-label="A purple snake hunting through my GitHub contribution graph, eating the days">',
            f'<rect x="{vb[0]}" y="{vb[1]}" width="{vb[2]}" height="{vb[3]}" fill="{INK}"/>']
     for c, week in enumerate(weeks):
         for r in range(ROWS):
             if r in week:
-                out.append(f'<rect x="{c * PITCH}" y="{r * PITCH}" width="{CELL}" height="{CELL}" rx="2" '
-                           f'fill="{LEVELS[week[r]]}"/>')
+                level = week[r]
+                attrs = f'x="{c * PITCH}" y="{r * PITCH}" width="{CELL}" height="{CELL}" rx="2"'
+                te = eaten_at(c, r) if level > 0 else None
+                if te is None or te >= cycle - 0.4:
+                    out.append(f'<rect {attrs} fill="{LEVELS[level]}"/>')
+                else:
+                    kt = f"0;{n(te / cycle)};{n((te + 0.14) / cycle)};{n(1 - 0.2 / cycle)}"
+                    out.append(f'<rect {attrs} fill="{LEVELS[level]}"><animate attributeName="fill" calcMode="discrete" '
+                               f'values="{LEVELS[level]};#ffffff;{LEVELS[0]};{LEVELS[level]}" keyTimes="{kt}" '
+                               f'dur="{n(cycle)}s" repeatCount="indefinite"/></rect>')
     out.append(f'<path id="sp" d="{d}" fill="none"/>')
-    # tail first, so the head is drawn on top. Start times count forward from zero: some viewers ignore negative ones and the snake never moves.
-    for k in range(len(SIZES) - 1, -1, -1):
-        size = SIZES[k]
-        begin = k * lag
-        out.append(f'<rect x="{n(-size / 2)}" y="{n(-size / 2)}" width="{size}" height="{size}" rx="2" fill="{PAPER}">'
-                   f'<animateMotion dur="{n(cycle)}s" begin="{n(begin)}s" repeatCount="indefinite">'
+    lag = STEP / SPEED                                  # each body square follows the one in front
+    # body, tail first so the head is drawn on top; start times only count forward from zero, since some viewers ignore negative ones
+    for k in range(len(BODY), 0, -1):
+        size = BODY[k - 1]
+        fill = SCALE_A if k % 2 else SCALE_B
+        out.append(f'<rect x="{n(-size / 2)}" y="{n(-size / 2)}" width="{n(size)}" height="{n(size)}" rx="{n(size * 0.32)}" '
+                   f'fill="{fill}" stroke="{INK}" stroke-width="1.2">'
+                   f'<animateMotion dur="{n(cycle)}s" begin="{n(k * lag)}s" repeatCount="indefinite">'
                    f'<mpath href="#sp"/></animateMotion></rect>')
+    hs = HEAD
+    out.append(
+        f'<g><animateMotion dur="{n(cycle)}s" begin="0s" repeatCount="indefinite" rotate="auto"><mpath href="#sp"/></animateMotion>'
+        f'<path d="M{n(hs / 2)} 0 L{n(hs / 2 + 7)} 0 M{n(hs / 2 + 7)} 0 L{n(hs / 2 + 10)} -2.4 M{n(hs / 2 + 7)} 0 L{n(hs / 2 + 10)} 2.4" '
+        f'stroke="{TONGUE}" stroke-width="1.3" stroke-linecap="round" fill="none">'
+        f'<animate attributeName="opacity" calcMode="discrete" values="1;0;1;0" keyTimes="0;0.25;0.5;0.75" dur="0.7s" repeatCount="indefinite"/></path>'
+        f'<rect x="{n(-hs / 2)}" y="{n(-hs / 2)}" width="{hs}" height="{hs}" rx="{n(hs * 0.38)}" fill="{PAPER}" stroke="{INK}" stroke-width="1.2"/>'
+        f'<circle cx="{n(hs * 0.16)}" cy="{n(-hs * 0.27)}" r="2" fill="{INK}"/>'
+        f'<circle cx="{n(hs * 0.16)}" cy="{n(hs * 0.27)}" r="2" fill="{INK}"/>'
+        f'<circle cx="{n(hs * 0.16 + 0.6)}" cy="{n(-hs * 0.27 - 0.5)}" r="0.7" fill="{PAPER}"/>'
+        f'<circle cx="{n(hs * 0.16 + 0.6)}" cy="{n(hs * 0.27 - 0.5)}" r="0.7" fill="{PAPER}"/></g>')
     out.append("</svg>")
     return "".join(out)
 

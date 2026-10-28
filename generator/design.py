@@ -162,7 +162,7 @@ def blots(x, y, w, h, seed=1, scale=1.0):
     import random
     rnd = random.Random(seed)
     out = []
-    count = max(3, int(w * h / 11000))
+    count = max(3, int(w * h / 8500))
     for _ in range(count):
         cx, cy = x + rnd.uniform(-0.02, 1.02) * w, y + rnd.uniform(-0.02, 1.02) * h
         big = rnd.choice([26, 18, 13, 9]) * scale

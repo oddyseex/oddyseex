@@ -127,8 +127,18 @@ def slip(x, y, w, d, size_row=21, size_group=30, pad=28, row_h=46, total_h=58):
     out = []
     cap_g = DISPLAY.cap(size_group)
     ty = y + body_h - total_h
-    out.append(rect(x, y, w, ty - y, ACCENT))
-    out.append(zigzag_bottom(x, ty, w, total_h, SURFACE))
+    # one charcoal sheet with a zigzag bottom, inked like the other sections; a dotted rule sets the total apart
+    tooth, depth = 16, 10
+    n = max(1, int(w // tooth))
+    seg = w / n
+    sd = f"M{num(x)} {num(y)}H{num(x + w)}V{num(y + body_h)}"
+    for i in range(n):
+        px = x + w - (i + 1) * seg
+        sd += f"L{num(px + seg / 2)} {num(y + body_h + depth)}L{num(px)} {num(y + body_h)}"
+    sd += "Z"
+    out.append(f'<clipPath id="slipc"><path d="{sd}"/></clipPath><path d="{sd}" fill="{SURFACE}"/>'
+               f'<g clip-path="url(#slipc)">{blots(x, y, w, body_h + depth, 33, 0.5)}</g>')
+    out.append(dots_h(x + pad, x + w - pad, ty, LINE, r=2.2, pitch=11))
     out.append(text(DISPLAY, "Last year", size_group, x + pad, y + 44 + cap_g - 6, PAPER))
     ry = y + 44 + size_group + 10
     for label, value in rows:
@@ -153,7 +163,7 @@ def streak_ticket_wide(x, y, w, h, d):
     d_path = ticket_d(x, y, w, h, notches)
     out = [f'<clipPath id="tk"><path d="{d_path}"/></clipPath>',
            f'<path d="{d_path}" fill="{SURFACE}"/>',
-           f'<g clip-path="url(#tk)">{blots(x, y, w, h, 31, 0.35)}{rect(x, y, col, h, ACCENT)}</g>']
+           f'<g clip-path="url(#tk)">{blots(x, y, w, h, 31, 0.5)}</g>']
     cells = [("Current streak, days", d["current_streak"]), ("Longest streak, days", d["longest_streak"]),
              ("Contributions, all time", d["total_all_time"])]
     for i, (label, value) in enumerate(cells):
@@ -171,7 +181,7 @@ def streak_ticket_stack(x, y, w, d, row_h=108):
     d_path = ticket_stack_d(x, y, w, h, notches)
     out = [f'<clipPath id="tk"><path d="{d_path}"/></clipPath>',
            f'<path d="{d_path}" fill="{SURFACE}"/>',
-           f'<g clip-path="url(#tk)">{blots(x, y, w, h, 32, 0.35)}{rect(x, y, w, row_h, ACCENT)}</g>']
+           f'<g clip-path="url(#tk)">{blots(x, y, w, h, 32, 0.5)}</g>']
     cells = [("Current streak, days", d["current_streak"]), ("Longest streak, days", d["longest_streak"]),
              ("Contributions, all time", d["total_all_time"])]
     for i, (label, value) in enumerate(cells):
