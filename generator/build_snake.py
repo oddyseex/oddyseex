@@ -25,7 +25,6 @@ PAD = 28
 SPEED = 140.0                                # pixels per second along the path
 SIZES = [12, 12, 11, 10, 9, 8, 7]            # head first; the squares shrink toward the tail
 LEAD = 130                                   # path before and after the graph, off screen, longer than the snake
-PREVIEW_COLS = 9                             # columns in at the first frame, so a still image shows the snake
 
 QUERY = ("query($l:String!){user(login:$l){contributionsCollection{contributionCalendar{weeks{"
          "contributionDays{weekday contributionLevel}}}}}}")
@@ -61,7 +60,7 @@ def n(v):
     return ("%.2f" % v).rstrip("0").rstrip(".")
 
 
-def build(weeks, start_cols=PREVIEW_COLS):
+def build(weeks):
     cols = len(weeks)
     x_of = lambda c: c * PITCH + CELL / 2
     top, bottom = CELL / 2, (ROWS - 1) * PITCH + CELL / 2
@@ -77,7 +76,6 @@ def build(weeks, start_cols=PREVIEW_COLS):
     d = "".join(d)
     cycle = length / SPEED
     lag = PITCH / SPEED                              # each square follows the one in front one cell later
-    ahead = (LEAD + start_cols * (PITCH + bottom - top)) / SPEED if start_cols else (len(SIZES) - 1) * lag
 
     W = (cols - 1) * PITCH + CELL
     H = (ROWS - 1) * PITCH + CELL
@@ -92,10 +90,10 @@ def build(weeks, start_cols=PREVIEW_COLS):
                 out.append(f'<rect x="{c * PITCH}" y="{r * PITCH}" width="{CELL}" height="{CELL}" rx="2" '
                            f'fill="{LEVELS[week[r]]}"/>')
     out.append(f'<path id="sp" d="{d}" fill="none"/>')
-    # tail first, so the head is drawn on top; every begin is negative, so the snake is already in motion at frame one
+    # tail first, so the head is drawn on top. Start times count forward from zero: some viewers ignore negative ones and the snake never moves.
     for k in range(len(SIZES) - 1, -1, -1):
         size = SIZES[k]
-        begin = -(ahead - k * lag)
+        begin = k * lag
         out.append(f'<rect x="{n(-size / 2)}" y="{n(-size / 2)}" width="{size}" height="{size}" rx="2" fill="{PAPER}">'
                    f'<animateMotion dur="{n(cycle)}s" begin="{n(begin)}s" repeatCount="indefinite">'
                    f'<mpath href="#sp"/></animateMotion></rect>')
